@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.bme.mit.train.tachograph.TachographTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-09T16:01:14" hostname="xubuntu" time="0.042">
+  <properties/>
+  <testcase name="isEmptyTest" classname="hu.bme.mit.train.tachograph.TachographTest" time="0.042"/>
+  <system-out><![CDATA[saveData
+D: Mon Mar 09 17:01:14 CET 2020
+RS: 0
+JP: 40
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
