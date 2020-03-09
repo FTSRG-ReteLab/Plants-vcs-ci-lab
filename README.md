@@ -4,6 +4,7 @@
 * BUGFIX
 * test
 * test-A branch
+* test-B branch
 * The application is implemented in Java.
 * [JUnit](http://junit.org/junit4/) is used for tests.
 
