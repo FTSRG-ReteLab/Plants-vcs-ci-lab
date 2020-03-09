@@ -1,7 +1,7 @@
 # Train Speed Controller
 
-
-
+    
+* BUGFIX
 * test
 * The application is implemented in Java.
 * [JUnit](http://junit.org/junit4/) is used for tests.
