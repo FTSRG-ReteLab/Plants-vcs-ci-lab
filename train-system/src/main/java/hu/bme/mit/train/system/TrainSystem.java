@@ -22,7 +22,7 @@ public class TrainSystem {
 		user = new TrainUserImpl(controller);
 		sensor = new TrainSensorImpl(controller, user);
 		this.timer = new Timer();
-		this.timer.schedule((TimerTask)controller,0,1000);
+		this.timer.schedule((TimerTask)controller,0,250);
 	}
 
 	public TrainController getController() {
