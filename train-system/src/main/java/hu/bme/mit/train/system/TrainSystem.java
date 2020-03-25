@@ -7,11 +7,23 @@ import hu.bme.mit.train.interfaces.TrainUser;
 import hu.bme.mit.train.sensor.TrainSensorImpl;
 import hu.bme.mit.train.user.TrainUserImpl;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TrainSystem {
 
-	private TrainController controller = new TrainControllerImpl();
-	private TrainUser user = new TrainUserImpl(controller);
-	private TrainSensor sensor = new TrainSensorImpl(controller, user);
+	private Timer timer;
+	private TrainController controller;
+	private TrainUser user;
+	private TrainSensor sensor;
+
+	public TrainSystem() {
+		controller = new TrainControllerImpl();
+		user = new TrainUserImpl(controller);
+		sensor = new TrainSensorImpl(controller, user);
+		this.timer = new Timer();
+		this.timer.schedule((TimerTask)controller,0,1000);
+	}
 
 	public TrainController getController() {
 		return controller;
