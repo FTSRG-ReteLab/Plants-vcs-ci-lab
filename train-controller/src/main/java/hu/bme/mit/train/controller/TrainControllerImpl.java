@@ -61,8 +61,6 @@ public class TrainControllerImpl implements TrainController {
         @Override
         public void run() {
             followSpeed();
-            System.out.println("Train speed at " + LocalDateTime.ofInstant(Instant.ofEpochMilli(scheduledExecutionTime()),
-                    ZoneId.systemDefault()) + ": " + referenceSpeed + " (Speed limit: " + speedLimit + ")");
         }
     }
 }
