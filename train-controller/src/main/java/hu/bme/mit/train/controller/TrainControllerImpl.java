@@ -2,48 +2,67 @@ package hu.bme.mit.train.controller;
 
 import hu.bme.mit.train.interfaces.TrainController;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TrainControllerImpl implements TrainController {
 
-	private int step = 0;
-	private int referenceSpeed = 0;
-	private int speedLimit = 0;
+    private int step = 0;
+    private int referenceSpeed = 0;
+    private int speedLimit = 0;
 
-	@Override
-	public void followSpeed() {
-		if (referenceSpeed < 0) {
-			referenceSpeed = 0;
-		} else {
-		    if(referenceSpeed+step > 0) {
+    public TrainControllerImpl() {
+        new Timer().schedule(new TrainMoveTask(), 0, 1000);
+    }
+
+    @Override
+    public void followSpeed() {
+        if (referenceSpeed < 0) {
+            referenceSpeed = 0;
+        } else {
+            if (referenceSpeed + step > 0) {
                 referenceSpeed += step;
             } else {
-		        referenceSpeed = 0;
+                referenceSpeed = 0;
             }
-		}
+        }
 
-		enforceSpeedLimit();
-	}
+        enforceSpeedLimit();
+    }
 
-	@Override
-	public int getReferenceSpeed() {
-		return referenceSpeed;
-	}
+    @Override
+    public int getReferenceSpeed() {
+        return referenceSpeed;
+    }
 
-	@Override
-	public void setSpeedLimit(int speedLimit) {
-		this.speedLimit = speedLimit;
-		enforceSpeedLimit();
-		
-	}
+    @Override
+    public void setSpeedLimit(int speedLimit) {
+        this.speedLimit = speedLimit;
+        enforceSpeedLimit();
 
-	private void enforceSpeedLimit() {
-		if (referenceSpeed > speedLimit) {
-			referenceSpeed = speedLimit;
-		}
-	}
+    }
 
-	@Override
-	public void setJoystickPosition(int joystickPosition) {
-		this.step = joystickPosition;		
-	}
+    private void enforceSpeedLimit() {
+        if (referenceSpeed > speedLimit) {
+            referenceSpeed = speedLimit;
+        }
+    }
 
+    @Override
+    public void setJoystickPosition(int joystickPosition) {
+        this.step = joystickPosition;
+    }
+
+    private class TrainMoveTask extends TimerTask {
+
+        @Override
+        public void run() {
+            followSpeed();
+            System.out.println("Train speed at " + LocalDateTime.ofInstant(Instant.ofEpochMilli(scheduledExecutionTime()),
+                    ZoneId.systemDefault()) + ": " + referenceSpeed + " (Speed limit: " + speedLimit + ")");
+        }
+    }
 }
